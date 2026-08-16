@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI-Powered Business Operations Automation System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        header {
+            height: 72px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 50px;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .login-button {
+            text-decoration: none;
+            background: #172033;
+            color: white;
+
+            padding: 11px 20px;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .login-button:hover {
+            background: #26334d;
+        }
+
+        .hero {
+            min-height: calc(100vh - 72px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 14px;
+            margin-bottom: 20px;
+
+            background: #eef2ff;
+            color: #3730a3;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: 52px;
+            line-height: 1.15;
+
+            letter-spacing: -1px;
+        }
+
+        .description {
+            max-width: 680px;
+
+            margin: 22px auto 32px;
+
+            color: #667085;
+
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .request-button {
+            display: inline-block;
+
+            padding: 16px 34px;
+
+            background: #172033;
+            color: white;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            box-shadow: 0 6px 18px rgba(23, 32, 51, 0.18);
+        }
+
+        .request-button:hover {
+            background: #26334d;
+        }
+
+        .features {
+            margin-top: 45px;
+
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+
+            color: #667085;
+
+            font-size: 13px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+        }
+
+        @media (max-width: 700px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            .brand {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .features {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="brand">
+        AI-Powered Business Operations Automation System
+    </div>
+
+    <a
+        href="/auth/login"
+        class="login-button"
+    >
+        Admin Login
+    </a>
+
+</header>
+
+
+<main class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            Intelligent Business Automation
+        </div>
+
+        <h1>
+            AI-Powered Business<br>
+            Operations Automation
+        </h1>
+
+        <p class="description">
+            Submit your business request and let our AI-powered
+            system analyze, prioritize, and process it automatically
+            while routing important cases for human review.
+        </p>
+
+
+        <a
+            href="/web/"
+            class="request-button"
+        >
+            Submit a Request
+        </a>
+
+
+        <div class="features">
+
+            <div class="feature">
+                <span class="dot"></span>
+                AI Analysis
+            </div>
+
+            <div class="feature">
+                <span class="dot"></span>
+                Automated Processing
+            </div>
+
+            <div class="feature">
+                <span class="dot"></span>
+                Human Review
+            </div>
+
+            <div class="feature">
+                <span class="dot"></span>
+                Email Notifications
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

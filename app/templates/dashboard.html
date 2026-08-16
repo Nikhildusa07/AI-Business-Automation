@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>AI-Powered Business Operations Automation System</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .container {
+            max-width: 1450px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        /* ------------------------------------------------
+        HEADER
+        ------------------------------------------------ */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 20px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .brand p {
+            margin-top: 8px;
+            color: #697386;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .live {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 30px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+            font-size: 14px;
+        }
+
+        .live-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #16a34a;
+        }
+
+        .logout-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 8px;
+            background: #dc2626;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        /* ------------------------------------------------
+        ALERTS
+        ------------------------------------------------ */
+
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .success {
+            background: #ecfdf3;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .error {
+            background: #fef2f2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        /* ------------------------------------------------
+        METRICS
+        ------------------------------------------------ */
+
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .metric {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 16px rgba(20,30,50,0.06);
+        }
+
+        .metric-label {
+            color: #697386;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .metric-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .metric-description {
+            margin-top: 6px;
+            color: #9aa3b2;
+            font-size: 13px;
+        }
+
+        /* ------------------------------------------------
+        SECTION
+        ------------------------------------------------ */
+
+        .section {
+            background: white;
+            border-radius: 14px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 16px rgba(20,30,50,0.06);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 19px;
+        }
+
+        .section-header span {
+            color: #697386;
+            font-size: 13px;
+        }
+
+        /* ------------------------------------------------
+        REVIEW CARDS
+        ------------------------------------------------ */
+
+        .review-card {
+            margin-top: 18px;
+            border: 1px solid #e7eaf0;
+            border-radius: 12px;
+            padding: 20px;
+            background: #fbfcfe;
+        }
+
+        .review-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .request-id {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .customer {
+            margin-top: 5px;
+            color: #697386;
+            font-size: 14px;
+        }
+
+        .priority {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: #fee2e2;
+            color: #991b1b;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .review-reason {
+            margin-top: 15px;
+            color: #475467;
+            line-height: 1.5;
+        }
+
+        .review-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .btn {
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .approve {
+            background: #16a34a;
+            color: white;
+        }
+
+        .approve:hover {
+            background: #15803d;
+        }
+
+        .reject {
+            background: #dc2626;
+            color: white;
+        }
+
+        .reject:hover {
+            background: #b91c1c;
+        }
+
+        /* ------------------------------------------------
+        TABLE
+        ------------------------------------------------ */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 18px;
+        }
+
+        th {
+            background: #f8fafc;
+            color: #697386;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        th,
+        td {
+            padding: 14px 12px;
+            text-align: left;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .status {
+            font-weight: 700;
+        }
+
+        .empty {
+            padding: 25px 0;
+            text-align: center;
+            color: #8a94a6;
+        }
+
+        /* ------------------------------------------------
+        RESPONSIVE
+        ------------------------------------------------ */
+
+        @media (max-width: 800px) {
+
+            .container {
+                padding: 18px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .header-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .review-top {
+                flex-direction: column;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="brand">
+
+            <h1>
+                AI-Powered Business Operations Automation System
+            </h1>
+
+            <p>
+                Manager Dashboard
+            </p>
+
+        </div>
+
+        <div class="header-right">
+
+            <div class="live">
+
+                <span class="live-dot"></span>
+
+                System Operational
+
+            </div>
+
+            <a
+                href="/auth/logout"
+                class="logout-btn"
+                onclick="return confirm('Are you sure you want to logout?');"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ALERTS -->
+
+    {% if success_message %}
+
+        <div class="alert success">
+            ✓ {{ success_message }}
+        </div>
+
+    {% endif %}
+
+
+    {% if error_message %}
+
+        <div class="alert error">
+            ⚠ {{ error_message }}
+        </div>
+
+    {% endif %}
+
+
+    <!-- METRICS -->
+
+    <div class="metrics">
+
+        <div class="metric">
+
+            <div class="metric-label">
+                TOTAL REQUESTS
+            </div>
+
+            <div class="metric-number">
+                {{ total_requests }}
+            </div>
+
+            <div class="metric-description">
+                Requests received
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                SUCCESSFUL AUTOMATIONS
+            </div>
+
+            <div class="metric-number">
+                {{ successful_automations }}
+            </div>
+
+            <div class="metric-description">
+                Successfully executed
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                PENDING REVIEWS
+            </div>
+
+            <div class="metric-number">
+                {{ pending_reviews }}
+            </div>
+
+            <div class="metric-description">
+                Require human attention
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                HIGH PRIORITY
+            </div>
+
+            <div class="metric-number">
+                {{ high_priority }}
+            </div>
+
+            <div class="metric-description">
+                High-priority cases
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                COMPLETED REQUESTS
+            </div>
+
+            <div class="metric-number">
+                {{ completed_requests }}
+            </div>
+
+            <div class="metric-description">
+                Successfully completed
+            </div>
+
+        </div>
+
+
+        <div class="metric">
+
+            <div class="metric-label">
+                FAILED AUTOMATIONS
+            </div>
+
+            <div class="metric-number">
+                {{ failed_automations }}
+            </div>
+
+            <div class="metric-description">
+                Requires investigation
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HUMAN REVIEW CENTER -->
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <h2>
+                Human Review Center
+            </h2>
+
+            <span>
+                {{ pending_reviews }} pending case(s)
+            </span>
+
+        </div>
+
+
+        {% if pending_review_items %}
+
+            {% for review, item in pending_review_items %}
+
+                <div class="review-card">
+
+                    <div class="review-top">
+
+                        <div>
+
+                            <div class="request-id">
+                                {{ item.request_id }}
+                            </div>
+
+                            <div class="customer">
+                                {{ item.customer_name }}
+                                ·
+                                {{ item.customer_email }}
+                            </div>
+
+                            <span class="priority">
+                                {{ item.priority }} PRIORITY
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Confidence:
+                            </strong>
+
+                            {{ item.confidence_score or "-" }}
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-reason">
+
+                        <strong>Intent:</strong>
+                        {{ item.intent or "-" }}
+
+                        <br><br>
+
+                        <strong>Reason for Review:</strong>
+                        {{ review.reason }}
+
+                        <br><br>
+
+                        <strong>AI Summary:</strong>
+                        {{ item.ai_summary or "-" }}
+
+                    </div>
+
+
+                    <div class="review-actions">
+
+                        <form
+                            method="post"
+                            action="/dashboard/review/{{ item.request_id }}/approve"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn approve"
+                                onclick="return confirm('Approve this request?');"
+                            >
+                                ✓ Approve Request
+                            </button>
+
+                        </form>
+
+
+                        <form
+                            method="post"
+                            action="/dashboard/review/{{ item.request_id }}/reject"
+                        >
+
+                            <button
+                                type="submit"
+                                class="btn reject"
+                                onclick="return confirm('Reject this request?');"
+                            >
+                                ✕ Reject Request
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                ✓ No requests are waiting for human review.
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- RECENT REQUESTS -->
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <h2>
+                Recent Requests
+            </h2>
+
+            <span>
+                Latest 10 requests
+            </span>
+
+        </div>
+
+
+        {% if recent_requests %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Request ID</th>
+                    <th>Customer</th>
+                    <th>Intent</th>
+                    <th>Priority</th>
+                    <th>Confidence</th>
+                    <th>Action</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in recent_requests %}
+
+                <tr>
+
+                    <td>
+                        <strong>
+                            {{ item.request_id }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ item.customer_name }}
+                    </td>
+
+                    <td>
+                        {{ item.intent or "-" }}
+                    </td>
+
+                    <td>
+                        {{ item.priority or "-" }}
+                    </td>
+
+                    <td>
+                        {{ item.confidence_score or "-" }}
+                    </td>
+
+                    <td>
+                        {{ item.action_taken or "-" }}
+                    </td>
+
+                    <td class="status">
+                        {{ item.status }}
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+            <div class="empty">
+                No requests available.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ACTIVITY -->
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <h2>
+                Automation Activity
+            </h2>
+
+            <span>
+                Latest system events
+            </span>
+
+        </div>
+
+
+        {% if recent_activity %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Request ID</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                    <th>Time</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for activity in recent_activity %}
+
+                <tr>
+
+                    <td>
+                        {{ activity.request_id }}
+                    </td>
+
+                    <td>
+                        {{ activity.action }}
+                    </td>
+
+                    <td class="status">
+                        {{ activity.status }}
+                    </td>
+
+                    <td>
+                        {{ activity.message }}
+                    </td>
+
+                    <td>
+                        {{ activity.created_at }}
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+            <div class="empty">
+                No activity recorded.
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

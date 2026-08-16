@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Login
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #f4f6f9;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color: #172033;
+        }
+
+
+        .card {
+
+            width: 100%;
+
+            max-width: 430px;
+
+            background: white;
+
+            padding: 42px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 12px 40px
+                rgba(0, 0, 0, 0.08);
+        }
+
+
+        h1 {
+
+            margin-top: 0;
+
+            margin-bottom: 8px;
+
+            font-size: 30px;
+        }
+
+
+        .subtitle {
+
+            color: #667085;
+
+            margin-bottom: 30px;
+
+            line-height: 1.5;
+        }
+
+
+        label {
+
+            display: block;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+
+            margin-top: 18px;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccd2dc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+        }
+
+
+        input:focus {
+
+            outline: none;
+
+            border-color: #315bd6;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            margin-top: 28px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #172033;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background: #26344f;
+        }
+
+
+        .error {
+
+            background: #fff1f1;
+
+            border: 1px solid #ffcaca;
+
+            color: #c62828;
+
+            padding: 12px;
+
+            border-radius: 7px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .back {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            text-decoration: none;
+
+            color: #667085;
+        }
+
+
+        .back:hover {
+
+            color: #172033;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="card">
+
+    <h1>
+        Admin Login
+    </h1>
+
+
+    <p class="subtitle">
+
+        Sign in to access the business operations
+        dashboard.
+
+    </p>
+
+
+    {% if error %}
+
+    <div class="error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+
+    <form
+        method="POST"
+        action="/auth/login"
+    >
+
+
+        <label for="username">
+            Username
+        </label>
+
+
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter username"
+            required
+        >
+
+
+        <label for="password">
+            Password
+        </label>
+
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter password"
+            required
+        >
+
+
+        <button type="submit">
+            Login to Dashboard
+        </button>
+
+
+    </form>
+
+
+    <a
+        href="/"
+        class="back"
+    >
+        ← Back to Home
+    </a>
+
+</div>
+
+
+</body>
+
+</html>

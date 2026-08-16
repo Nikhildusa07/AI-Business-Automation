@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Submit Business Request
+    </title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f4f6f9;
+
+            color: #172033;
+
+            min-height: 100vh;
+        }
+
+
+        .topbar {
+
+            padding: 20px 40px;
+
+            background: white;
+
+            border-bottom: 1px solid #e5e9f0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .brand {
+
+            font-weight: 700;
+
+            font-size: 18px;
+        }
+
+
+        .back-btn {
+
+            text-decoration: none;
+
+            color: #172033;
+
+            font-weight: 600;
+
+            padding: 9px 18px;
+
+            border: 1px solid #ccd2dc;
+
+            border-radius: 7px;
+        }
+
+
+        .back-btn:hover {
+
+            background: #172033;
+
+            color: white;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 760px;
+
+            margin: 55px auto;
+
+            padding: 0 20px;
+        }
+
+
+        .card {
+
+            background: white;
+
+            padding: 45px;
+
+            border-radius: 15px;
+
+            box-shadow:
+                0 10px 35px
+                rgba(0, 0, 0, 0.07);
+        }
+
+
+        h1 {
+
+            margin-top: 0;
+
+            font-size: 32px;
+        }
+
+
+        .description {
+
+            color: #667085;
+
+            line-height: 1.6;
+
+            margin-bottom: 35px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-top: 20px;
+
+            margin-bottom: 8px;
+
+            font-weight: 700;
+        }
+
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #ccd2dc;
+
+            border-radius: 7px;
+
+            font-size: 15px;
+
+            font-family: inherit;
+
+            outline: none;
+        }
+
+
+        input:focus,
+        textarea:focus {
+
+            border-color: #315bd6;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(49, 91, 214, 0.1);
+        }
+
+
+        textarea {
+
+            height: 150px;
+
+            resize: vertical;
+        }
+
+
+        button {
+
+            width: 100%;
+
+            margin-top: 30px;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 7px;
+
+            background: #172033;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        button:hover {
+
+            background: #26344f;
+        }
+
+
+        .secure-text {
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #8992a3;
+
+            font-size: 13px;
+        }
+
+
+        @media (max-width: 600px) {
+
+            .topbar {
+
+                padding: 18px 20px;
+            }
+
+
+            .card {
+
+                padding: 28px 22px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="topbar">
+
+    <div class="brand">
+        AI Business Operations Automation
+    </div>
+
+
+    <a
+        href="/"
+        class="back-btn"
+    >
+        ← Back to Home
+    </a>
+
+</div>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            Submit a Business Request
+        </h1>
+
+
+        <p class="description">
+
+            Provide your details and describe your
+            business request. Our AI-powered system
+            will analyze, prioritize, and process
+            your request automatically.
+
+        </p>
+
+
+        <form
+            method="POST"
+            action="/web/submit"
+        >
+
+
+            <label for="customer_name">
+                Customer Name
+            </label>
+
+
+            <input
+                type="text"
+                id="customer_name"
+                name="customer_name"
+                placeholder="Enter your name"
+                required
+            >
+
+
+            <label for="customer_email">
+                Customer Email
+            </label>
+
+
+            <input
+                type="email"
+                id="customer_email"
+                name="customer_email"
+                placeholder="Enter your email address"
+                required
+            >
+
+
+            <label for="input_text">
+                Business Request
+            </label>
+
+
+            <textarea
+                id="input_text"
+                name="input_text"
+                placeholder="Describe your business request..."
+                required
+            ></textarea>
+
+
+            <button type="submit">
+                Submit Request
+            </button>
+
+
+        </form>
+
+
+        <div class="secure-text">
+
+            Your request will be securely analyzed
+            and processed by our automation system.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

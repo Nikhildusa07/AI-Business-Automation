@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Business Operations</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .navbar {
+            height: 80px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .login-btn {
+            text-decoration: none;
+            background: #172033;
+            color: white;
+            padding: 11px 24px;
+            border-radius: 7px;
+            font-weight: bold;
+        }
+
+        .hero {
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 19px;
+            color: #667085;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+
+        .request-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .request-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 55px;
+            flex-wrap: wrap;
+        }
+
+        .feature {
+            background: white;
+            padding: 22px;
+            width: 220px;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+
+        .feature h3 {
+            margin-top: 0;
+        }
+
+        .feature p {
+            font-size: 14px;
+            margin: 0;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            AI Business Operations
+        </div>
+
+        <a
+            href="/auth/login"
+            class="login-btn"
+        >
+            Admin Login
+        </a>
+
+    </nav>
+
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>
+                AI-Powered Business Operations
+            </h1>
+
+            <p>
+                Submit your business request and let our
+                intelligent automation system analyze,
+                prioritize, and process it efficiently.
+            </p>
+
+            <a
+                href="/web/"
+                class="request-btn"
+            >
+                Submit a Business Request
+            </a>
+
+
+            <div class="features">
+
+                <div class="feature">
+                    <h3>AI Analysis</h3>
+                    <p>
+                        Automatically understand and classify
+                        incoming requests.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Smart Automation</h3>
+                    <p>
+                        Automatically process eligible requests
+                        based on business rules.
+                    </p>
+                </div>
+
+                <div class="feature">
+                    <h3>Manager Dashboard</h3>
+                    <p>
+                        Monitor requests, reviews and
+                        automation activity.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
