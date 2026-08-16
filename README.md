@@ -104,3 +104,9 @@ AI-Business-Automation
 ├── .gitignore
 ├── README.md
 └── ...
+
+🚀 Installation
+Clone Repository
+
+git clone https://github.com/Nikhildusa07/AI-Business-Automation.git
+cd AI-Business-Automation
