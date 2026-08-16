@@ -1,344 +1,160 @@
 AI-Powered Business Operations Automation System
 
-An AI-powered business operations platform that transforms incoming business requests into structured, actionable workflows using FastAPI, Google Gemini AI, automated decision-making, human-in-the-loop review, database persistence, email notifications, and an administrative dashboard.
+XQORA Technologies — AI Automation Intern Advanced Project
 
-Overview
+An AI-powered business operations automation platform that receives business requests, validates and stores them, analyzes them with Google Gemini, applies priority-based decision logic, executes workflow actions, sends customer notifications through Brevo, and routes sensitive or uncertain requests to human review.
 
-Modern businesses receive operational requests that may require classification, prioritization, decision-making, approval, execution, and follow-up.
+Live Demo
 
-This project demonstrates how generative AI can be integrated into a backend application to automate suitable business workflows while maintaining human oversight for sensitive or uncertain decisions.
+Production: https://ai-business-automation-qfx0.onrender.com
 
-Core Workflow
+GitHub: https://github.com/Nikhildusa07/AI-Business-Automation
 
-Business Request
-       |
-       v
-   Validation
-       |
-       v
-Database Persistence
-       |
-       v
-   AI Analysis
-       |
-       v
- Decision Engine
-       |
-       +-------------------+
-       |                   |
-       v                   v
-Automatic Action      Human Review
-       |                   |
-       |             +-----+-----+
-       |             |           |
-       |             v           v
-       |          Approved    Rejected
-       |             |           |
-       +-------------+-----------+
-                     |
-                     v
-                Notification
-                     |
-                     v
-              Activity Tracking
-                     |
-                     v
-              Admin Dashboard
+Project Objective
 
-Project Objectives
+The system demonstrates a real AI-powered business automation workflow rather than a simple chatbot:
 
-The system is designed to:
-
-Capture business requests through REST APIs and web forms
-
-Validate and persist incoming requests
-
-Analyze requests using Google Gemini AI
-
-Generate AI-assisted workflow decisions
-
-Automatically process suitable requests
-
-Route sensitive or uncertain requests for human review
-
-Send workflow notifications
-
-Track request and workflow activity
-
-Provide an administrative dashboard
+Request / Trigger
+      |
+      v
+Validation
+      |
+      v
+Database Storage
+      |
+      v
+Gemini AI Analysis
+      |
+      v
+Priority + Confidence
+      |
+      v
+Decision Engine
+   +--+---------+---------+
+   |            |         |
+  LOW        MEDIUM      HIGH
+   |            |         |
+Auto Action  Follow-up  Human Review
+   |            |         |
+   +------------+---------+
+                |
+                v
+        Automation Actions
+                |
+                v
+       Brevo Email Notification
+                |
+                v
+        Activity / Audit Log
+                |
+                v
+        Administrative Dashboard
 
 Key Features
 
-1. Business Request Intake
-
-REST API request handling
+Multiple Triggers
 
 Web-based request submission
 
-Pydantic input validation
+REST API request processing
 
-Structured request processing
+AI Processing
 
-Database persistence
+Google Gemini analyzes requests and produces:
 
-Request status tracking
+Intent
 
-2. Gemini AI Integration
+Priority: HIGH, MEDIUM, or LOW
 
-Google Gemini is integrated through the google-genai SDK.
+Confidence score
 
-The AI service is responsible for:
+Summary
 
-Understanding business requests
+Priority Logic
 
-Extracting relevant information
+Priority
 
-Analyzing request content
+Example
 
-Supporting operational decisions
+Typical Action
 
-Producing structured AI-related output
+HIGH
 
-AI logic is isolated in a dedicated service layer rather than being tightly coupled to API routes.
+Fraud, unauthorized transaction, security issue, account compromise
 
-3. Automated Decision Making
+Human review / escalation
 
-A dedicated decision service evaluates the request and AI analysis to determine the appropriate workflow.
+MEDIUM
+
+Subscription change, profile update, billing question, normal support
+
+Follow-up / conditional processing
+
+LOW
+
+Business hours, general information, routine enquiries
+
+Automated processing
+
+AI-Agent / Multi-Step Workflow
 
 Request
-   |
-   v
-AI Analysis
-   |
-   v
-Decision Engine
-   |
-   +---------------------------+
-   |            |              |
-   v            v              v
-  Low         Medium          High
-   |            |              |
-   v            v              v
-Automatic    Conditional    Human Review
- Action        Review
+  -> Tool Selection
+  -> Business Data Retrieval
+  -> AI Reasoning
+  -> Decision
+  -> Action / Human Review
+  -> Verification / Activity Tracking
 
-4. Human-in-the-Loop Review
+Business tools include:
 
-The system does not blindly execute every AI recommendation.
+Business hours
 
-Requests requiring additional validation can be reviewed by an administrator.
+Payment/refund support
 
-AI Recommendation
-        |
-        v
-   Needs Review?
-      /       \
-    No         Yes
-    |           |
-    v           v
-Automation   Human Review
-                |
-          +-----+-----+
-          |           |
-          v           v
-       Approve      Reject
+Customer profile support
 
-5. Administrative Dashboard
+General business support
 
-The dashboard provides visibility into:
+Human-in-the-Loop
 
-Business requests
+Administrators can review pending requests and approve or reject them when additional validation is required.
 
-Request status
+Email Notifications
+
+Production email delivery uses Brevo. Customer notifications are sent to the email supplied with the request.
+
+Database
+
+SQLAlchemy is used for persistence and workflow tracking, including request information, decisions, reviews, automation activity, notifications, status, and timestamps.
+
+Dashboard
+
+The admin dashboard provides visibility into:
+
+Requests
+
+Status
 
 Pending reviews
 
-Approval and rejection actions
+High-priority cases
 
-Workflow activity
+Approval/rejection actions
+
+Recent workflow activity
 
 Automation results
 
-6. Authentication & Session Management
+Error Handling
 
-Administrative access is protected using authentication and session management.
+The system includes deterministic fallbacks:
 
-The application uses Starlette SessionMiddleware and environment variables for sensitive configuration such as:
+Gemini unavailable/quota exhausted -> local analysis fallback
 
-SECRET_KEY
+AI tool-selection failure -> deterministic tool-selection fallback
 
-Admin credentials
-
-API keys
-
-Notification credentials
-
-7. Database Persistence
-
-SQLAlchemy 2.x is used for database interaction and ORM-based persistence.
-
-Database records support tracking of:
-
-Business requests
-
-Workflow status
-
-Decisions
-
-Reviews
-
-Automation activity
-
-Notifications
-
-8. Notification System
-
-A dedicated notification service handles workflow email notifications.
-
-The current production notification integration uses Brevo.
-
-Notification logic remains separate from:
-
-API routes
-
-AI services
-
-Decision services
-
-Database models
-
-Automation logic
-
-System Architecture
-
-                    +-------------------+
-                    |    User / Admin   |
-                    +---------+---------+
-                              |
-                              v
-                  +-----------------------+
-                  | Web Forms / REST API  |
-                  +-----------+-----------+
-                              |
-                              v
-                  +-----------------------+
-                  |       FastAPI         |
-                  |    Routing Layer      |
-                  +-----------+-----------+
-                              |
-              +---------------+---------------+
-              |               |               |
-              v               v               v
-       +-------------+ +-------------+ +-------------+
-       | AI Service  | |  Decision   | | Automation  |
-       |             | |  Service    | |  Service    |
-       +------+------+ +------+------+ +------+------+
-              |               |               |
-              +---------------+---------------+
-                              |
-                              v
-                  +-----------------------+
-                  |      SQLAlchemy       |
-                  +-----------+-----------+
-                              |
-                              v
-                  +-----------------------+
-                  |       Database        |
-                  +-----------+-----------+
-                              |
-                              v
-                  +-----------------------+
-                  | Notification Service  |
-                  +-----------+-----------+
-                              |
-                              v
-                  +-----------------------+
-                  |   Admin Dashboard     |
-                  +-----------------------+
-
-End-to-End Workflow
-
-1. User submits a business request
-                |
-                v
-2. FastAPI receives the request
-                |
-                v
-3. Pydantic validates the input
-                |
-                v
-4. Request is stored in the database
-                |
-                v
-5. Gemini AI analyzes the request
-                |
-                v
-6. Decision service evaluates the request
-                |
-        +-------+-------+
-        |               |
-        v               v
- Automatic Action   Human Review
-        |               |
-        |        +------+------+
-        |        |             |
-        |        v             v
-        |    Approved       Rejected
-        |        |             |
-        +--------+-------------+
-                 |
-                 v
-       Workflow status updated
-                 |
-                 v
-          Notification sent
-                 |
-                 v
-          Activity recorded
-                 |
-                 v
-          Admin Dashboard
-
-Project Structure
-
-AI-Business-Automation/
-|
-+-- app/
-|   |
-|   +-- routes/
-|   |   +-- __init__.py
-|   |   +-- auth.py
-|   |   +-- dashboard.py
-|   |   +-- requests.py
-|   |   +-- reviews.py
-|   |   +-- web_form.py
-|   |
-|   +-- services/
-|   |   +-- __init__.py
-|   |   +-- agent_service.py
-|   |   +-- ai_service.py
-|   |   +-- automation_service.py
-|   |   +-- decision_service.py
-|   |   +-- notification_service.py
-|   |
-|   +-- templates/
-|   |   +-- ...
-|   |
-|   +-- database.py
-|   +-- models.py
-|   +-- schemas.py
-|   +-- main.py
-|
-+-- test_ai.py
-+-- test_automation.py
-+-- test_automation_db.py
-+-- test_decision.py
-+-- test_gemini.py
-+-- test_smtp.py
-|
-+-- .gitignore
-+-- requirements.txt
-+-- README.md
+Email failures -> captured and reported by the notification service
 
 Technology Stack
 
@@ -348,35 +164,35 @@ Purpose
 
 Python 3.11+
 
-Core programming language
+Core language
 
 FastAPI
 
-Backend API and application framework
+Backend and REST API
 
 Uvicorn
 
-ASGI application server
+ASGI server
 
 Pydantic
 
-Data validation and schemas
+Validation and schemas
 
 SQLAlchemy 2.x
 
-ORM and database interaction
+ORM/database
 
 Jinja2
 
-Server-side HTML templates
+Server-side templates
 
 Google Gemini
 
-AI-powered request analysis
+AI analysis
 
 Google GenAI SDK
 
-Gemini API integration
+Gemini integration
 
 Starlette Sessions
 
@@ -390,9 +206,111 @@ Brevo
 
 Email notifications
 
+Render
+
+Production deployment
+
+System Architecture
+
+User
+ |
+ +--> Web Form
+ |
+ +--> REST API
+       |
+       v
+    FastAPI
+       |
+       +--> Pydantic Validation
+       |
+       +--> Database
+       |
+       +--> AI Service --> Gemini
+       |
+       +--> Agent Service
+       |      |
+       |      +--> Tool Selection
+       |      +--> Data Retrieval
+       |      +--> Reasoning
+       |
+       +--> Decision Service
+       |
+       +--> Automation Service
+       |
+       +--> Notification Service --> Brevo
+       |
+       +--> Human Review
+       |
+       +--> Admin Dashboard
+
+End-to-End Workflow
+
+User submits a request through the web form or REST API.
+
+FastAPI receives and validates the request.
+
+Request data is persisted.
+
+Gemini analyzes the request.
+
+Intent, priority, confidence, and summary are generated.
+
+The agent workflow selects a suitable business tool.
+
+Relevant business information is retrieved.
+
+The workflow reasons about the request.
+
+The decision service determines the next action.
+
+Suitable requests are processed automatically.
+
+High-priority or low-confidence cases can enter human review.
+
+Brevo sends workflow notifications.
+
+Activity and status are recorded.
+
+Administrators monitor the workflow through the dashboard.
+
+Project Structure
+
+AI-Business-Automation/
+|
++-- app/
+|   +-- routes/
+|   |   +-- auth.py
+|   |   +-- dashboard.py
+|   |   +-- requests.py
+|   |   +-- reviews.py
+|   |   +-- web_form.py
+|   |
+|   +-- services/
+|   |   +-- agent_service.py
+|   |   +-- ai_service.py
+|   |   +-- automation_service.py
+|   |   +-- decision_service.py
+|   |   +-- notification_service.py
+|   |
+|   +-- templates/
+|   +-- database.py
+|   +-- models.py
+|   +-- schemas.py
+|   +-- main.py
+|
++-- test_ai.py
++-- test_automation.py
++-- test_automation_db.py
++-- test_decision.py
++-- test_gemini.py
++-- test_smtp.py
++-- requirements.txt
++-- .gitignore
++-- README.md
+
 Application Routes
 
-Route Module
+Module
 
 Responsibility
 
@@ -406,7 +324,7 @@ Business request operations
 
 web_form.py
 
-Web-based request submission
+Web request submission
 
 reviews.py
 
@@ -416,108 +334,52 @@ dashboard.py
 
 Administrative dashboard
 
-Service Layer
-
-AI Service
-
-app/services/ai_service.py
-
-Handles AI-related request analysis and Gemini integration.
-
-Agent Service
-
-app/services/agent_service.py
-
-Contains agent-oriented application logic.
-
-Decision Service
-
-app/services/decision_service.py
-
-Processes request information and determines the appropriate workflow.
-
-Automation Service
-
-app/services/automation_service.py
-
-Handles automated workflow execution.
-
-Notification Service
-
-app/services/notification_service.py
-
-Handles business workflow notifications and email delivery.
-
-This separation keeps business logic independent from FastAPI route handlers.
-
 Environment Configuration
 
-Create a .env file in the project root.
+Create .env locally:
 
 SECRET_KEY=your-secret-key
-
 GEMINI_API_KEY=your-gemini-api-key
-
 BREVO_API_KEY=your-brevo-api-key
 BREVO_SENDER_EMAIL=your-verified-sender-email
-
 ADMIN_USERNAME=your-admin-username
 ADMIN_PASSWORD=your-admin-password
 
-Never commit .env files, API keys, passwords, or other secrets to GitHub.
+Never commit .env, API keys, passwords, or other secrets to GitHub.
 
-For production deployment, configure environment variables directly in the hosting platform.
+For Render, configure the required values in the service Environment Variables.
 
 Local Setup
-
-1. Clone the Repository
 
 git clone https://github.com/Nikhildusa07/AI-Business-Automation.git
 cd AI-Business-Automation
 
-2. Create a Virtual Environment
-
-Windows
-
 python -m venv venv
 venv\Scripts\activate
 
-macOS / Linux
-
-python3 -m venv venv
-source venv/bin/activate
-
-3. Install Dependencies
-
 pip install -r requirements.txt
 
-4. Configure Environment Variables
+Create .env, then run:
 
-Create .env and add the required configuration values.
+python -m uvicorn app.main:app --reload
 
-5. Start the Application
-
-uvicorn app.main:app --reload
-
-Open:
+Application:
 
 http://127.0.0.1:8000
 
 API Documentation
 
-FastAPI provides automatic interactive documentation.
-
-Swagger UI
+Swagger UI:
 
 http://127.0.0.1:8000/docs
 
-ReDoc
+ReDoc:
 
 http://127.0.0.1:8000/redoc
 
 Testing
 
-The project contains component-level tests covering important functionality.
+Available component tests:
 
 test_ai.py
 test_automation.py
@@ -526,7 +388,7 @@ test_decision.py
 test_gemini.py
 test_smtp.py
 
-Run individual tests:
+Example:
 
 python test_ai.py
 python test_automation.py
@@ -535,259 +397,150 @@ python test_decision.py
 python test_gemini.py
 python test_smtp.py
 
-Test areas include:
+Test areas include AI processing, Gemini integration, decision logic, automation, database-backed automation, and email functionality.
 
-AI processing
+Production Deployment
 
-Gemini integration
-
-Decision logic
-
-Automation logic
-
-Database-backed automation
-
-Email notification functionality
-
-Deployment
-
-The application is deployed as a FastAPI web service on Render.
-
-Production environment variables are configured through the hosting platform.
+The application is deployed as a FastAPI service on Render.
 
 Internet
-    |
-    v
- Render
-    |
-    v
-FastAPI Application
-    |
-    +---- Gemini AI
-    |
-    +---- Database
-    |
-    +---- Brevo Notifications
-
-Production Application
-
-https://ai-business-automation-qfx0.onrender.com
-
-Security Considerations
-
-For production usage:
-
-Never commit .env files
-
-Never expose API keys in frontend code
-
-Use HTTPS
-
-Use secure session configuration
-
-Use strong admin credentials
-
-Validate external inputs
-
-Protect public API endpoints
-
-Use secure secret management
-
-Monitor application logs
-
-Review sensitive AI-generated actions before execution
-
-Example Business Scenario
-
-Traditional Process
-
-Request
    |
    v
-Employee reads request
-   |
-   v
-Employee decides action
-   |
-   v
-Employee performs action
-   |
-   v
-Employee sends notification
-   |
-   v
-Employee updates records
-
-Automated Process
-
-Request
+Render
    |
    v
 FastAPI
-   |
-   v
-Gemini AI
-   |
-   v
-Decision Engine
-   |
-   +-------------------+
-   |                   |
-   v                   v
-Automation        Human Review
-   |                   |
-   +---------+---------+
-             |
-             v
-        Notification
-             |
-             v
-          Database
-             |
-             v
-      Admin Dashboard
+   +--> Gemini AI
+   +--> Database
+   +--> Brevo
 
-The system therefore acts as an AI-assisted operational workflow, rather than simply providing a chatbot interface.
+Production URL: https://ai-business-automation-qfx0.onrender.com
 
-Benefits
+Production testing confirmed successful customer email delivery through Brevo.
 
-Faster Processing
+Example Test Requests
 
-Automates repetitive business workflows and reduces unnecessary manual intervention.
+LOW
 
-AI-Assisted Decisions
+Customer email: customer@example.com
 
-Uses Gemini AI to analyze incoming business requests and support operational decisions.
+What are your business working hours?
 
-Human Oversight
+Expected: LOW -> automated processing.
 
-Provides human review for requests that should not be automatically processed.
+MEDIUM
 
-Operational Visibility
+Customer email: customer@example.com
 
-Database persistence and the administrative dashboard provide visibility into workflow status and activity.
+I want to update my profile and change my subscription plan.
 
-Maintainable Architecture
+Expected: MEDIUM -> follow-up / conditional processing.
 
-Routes, services, database logic, schemas, and templates are separated into dedicated modules.
+HIGH
 
-Secure Configuration
+Customer email: customer@example.com
 
-Sensitive configuration is handled through environment variables rather than hard-coded credentials.
+I see an unauthorized transaction and believe my account may be compromised. Please investigate immediately.
+
+Expected: HIGH -> human review / escalation.
+
+Security
+
+Keep secrets in environment variables.
+
+Never commit .env.
+
+Never expose API keys in frontend code.
+
+Use HTTPS in production.
+
+Use strong administrator credentials.
+
+Validate incoming data.
+
+Protect administrative routes with authentication.
+
+Use human review for sensitive decisions.
+
+Known Limitations
+
+Gemini availability and quota can affect AI analysis.
+
+Deterministic fallback logic is used when Gemini is unavailable.
+
+The project is designed as an internship/portfolio automation platform rather than a large-scale enterprise system.
 
 Future Enhancements
 
-Potential improvements include:
-
 Role-based access control
 
-OAuth / SSO authentication
+OAuth / SSO
 
 Advanced AI agents
 
-Tool calling and function execution
+More external API/tool integrations
 
-Configurable workflow definitions
+Configurable workflows
 
-Multi-step approval workflows
+Multi-step approvals
 
 SLA monitoring
 
-Automated escalation
-
 PostgreSQL
 
-Redis and background task processing
+Redis/background workers
 
-Docker deployment
-
-CI/CD pipelines
+Docker and CI/CD
 
 Advanced analytics
 
 Slack / Microsoft Teams integration
 
-CRM and ERP integrations
-
-External REST API integrations
+CRM/ERP integrations
 
 Project Status
 
-Status: Completed Core Internship Project
+Completed — Core Internship Project
 
-Implemented capabilities include:
+Implemented:
 
 FastAPI backend
 
-REST API request processing
+Web form trigger
 
-Web-based request submission
+REST API trigger
 
 Pydantic validation
 
-SQLAlchemy database persistence
+SQLAlchemy persistence
 
 Gemini AI integration
 
-AI service layer
+AI-agent/multi-step workflow
+
+Tool selection and data retrieval
 
 Decision service
+
+Conditional logic
 
 Automation service
 
 Human-in-the-loop review
 
-Authentication and sessions
+Authentication
 
-Administrative dashboard
+Admin dashboard
 
-Email notification system
+Brevo email notifications
 
-Component-level testing
+Error handling and fallback
 
-Environment-based configuration
-
-Production deployment
-
-What This Project Demonstrates
-
-This project demonstrates practical experience in:
-
-Python backend development
-
-FastAPI
-
-REST API development
-
-Pydantic validation
-
-SQLAlchemy ORM
-
-Database-driven workflows
-
-Generative AI integration
-
-Google Gemini API
-
-AI-assisted decision making
-
-Business process automation
-
-Human-in-the-loop systems
-
-Authentication and sessions
-
-Server-side templating
-
-Email notification systems
-
-Modular software architecture
-
-Automated testing
+Testing
 
 Environment-based configuration
 
-Cloud deployment
+Render deployment
 
 Author
 
@@ -795,61 +548,8 @@ Nikhil
 
 AI & ML Engineer | Python Backend Developer | AI Automation Developer
 
-Focused on building practical systems combining:
-
-Python
-+
-Backend Engineering
-+
-Artificial Intelligence
-+
-Automation
-+
-Full-Stack Development
-
-Repository
-
-GitHub:
-
-https://github.com/Nikhildusa07/AI-Business-Automation
-
 License
 
-This project is intended for educational, development, and portfolio purposes.
-
-Acknowledgements
-
-This project was developed as a practical implementation of AI-powered business operations automation, combining modern Python backend development, generative AI, workflow automation, database persistence, notifications, and human oversight.
-
-Final Takeaway
-
-The AI-Powered Business Operations Automation System demonstrates how generative AI can be integrated into a real backend application to transform business requests into structured, traceable workflows.
-
-Business Request
-       |
-       v
-    FastAPI
-       |
-       v
-   Gemini AI
-       |
-       v
- Decision Engine
-       |
-       +-------------------+
-       |                   |
-       v                   v
-Automation          Human Review
-       |                   |
-       +---------+---------+
-                 |
-                 v
-            Notification
-                 |
-                 v
-             Database
-                 |
-                 v
-          Admin Dashboard
+Educational, development, and portfolio purposes.
 
 Turn repetitive business operations into intelligent, traceable, and human-supervised automated workflows.
