@@ -49,7 +49,7 @@ app.add_middleware(
     session_cookie="business_admin_session",
     max_age=60 * 60 * 8,
     same_site="lax",
-    https_only=False
+    https_only=True
 )
 
 
