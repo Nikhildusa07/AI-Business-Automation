@@ -1,6 +1,5 @@
 import os
-import smtplib
-from email.message import EmailMessage
+import requests
 
 
 def send_notification(
@@ -9,22 +8,18 @@ def send_notification(
     message: str
 ):
     """
-    Send email notification using Gmail SMTP.
+    Send email notification using Brevo HTTP API.
     """
 
-    smtp_host = os.getenv("SMTP_HOST", "smtp.gmail.com")
-    smtp_port = int(os.getenv("SMTP_PORT", "465"))
-    smtp_user = os.getenv("SMTP_USER")
-    smtp_password = os.getenv("SMTP_PASSWORD")
-    sender_email = os.getenv("NOTIFICATION_FROM", smtp_user)
+    api_key = os.getenv("BREVO_API_KEY")
+    sender_email = os.getenv("BREVO_SENDER_EMAIL")
 
-    # Validate SMTP configuration
-    if not smtp_user or not smtp_password:
-        print("EMAIL ERROR: SMTP credentials are missing.")
+    if not api_key or not sender_email:
+        print("EMAIL ERROR: Brevo configuration is missing.")
 
         return {
             "status": "FAILED",
-            "message": "SMTP credentials are missing."
+            "message": "Brevo configuration is missing."
         }
 
     if not recipient_email:
@@ -36,33 +31,47 @@ def send_notification(
         }
 
     try:
-        email = EmailMessage()
+        url = "https://api.brevo.com/v3/smtp/email"
 
-        email["From"] = sender_email
-        email["To"] = recipient_email
-        email["Subject"] = subject
+        headers = {
+            "accept": "application/json",
+            "api-key": api_key,
+            "content-type": "application/json"
+        }
 
-        email.set_content(message)
+        data = {
+            "sender": {
+                "email": sender_email
+            },
+            "to": [
+                {
+                    "email": recipient_email
+                }
+            ],
+            "subject": subject,
+            "textContent": message
+        }
 
-        # Gmail SMTP SSL
-        with smtplib.SMTP_SSL(
-            smtp_host,
-            smtp_port,
+        response = requests.post(
+            url,
+            headers=headers,
+            json=data,
             timeout=30
-        ) as server:
+        )
 
-            server.login(
-                smtp_user,
-                smtp_password
-            )
+        if response.status_code in (200, 201, 202):
+            print(f"EMAIL SENT SUCCESSFULLY: {recipient_email}")
 
-            server.send_message(email)
+            return {
+                "status": "SENT",
+                "message": "Notification sent successfully."
+            }
 
-        print(f"EMAIL SENT SUCCESSFULLY: {recipient_email}")
+        print(f"EMAIL ERROR: {response.status_code} - {response.text}")
 
         return {
-            "status": "SENT",
-            "message": "Notification sent successfully."
+            "status": "FAILED",
+            "message": response.text
         }
 
     except Exception as e:
