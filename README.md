@@ -110,3 +110,173 @@ Clone Repository
 
 git clone https://github.com/Nikhildusa07/AI-Business-Automation.git
 cd AI-Business-Automation
+
+Backend Setup
+Create Virtual Environment
+python -m venv venv
+Activate Virtual Environment
+Windows
+venv\Scripts\activate
+Linux / macOS
+source venv/bin/activate
+Install Dependencies
+pip install -r requirements.txt
+⚙️ Environment Variables
+
+Create a .env file in the project root.
+
+GEMINI_API_KEY=your_gemini_api_key
+
+
+BREVO_API_KEY=your_brevo_api_key
+BREVO_SENDER_EMAIL=your_verified_sender_email
+
+
+DATABASE_URL=your_database_url
+
+
+ADMIN_USERNAME=your_admin_username
+ADMIN_PASSWORD=your_admin_password
+
+
+SECRET_KEY=your_secret_key
+
+Do not upload your .env file or API keys to GitHub.
+
+▶️ Run the Application
+
+Start the FastAPI server:
+
+python -m uvicorn app.main:app --reload
+
+Application URL:
+
+http://127.0.0.1:8000/
+🔄 Automation Workflow
+Customer Request
+       ↓
+Request Validation
+       ↓
+AI Analysis
+       ↓
+Priority Classification
+       ↓
+Database Storage
+       ↓
+Human Review
+       ↓
+Approval / Rejection
+       ↓
+Automated Action
+       ↓
+Email Notification
+🤖 AI Processing
+
+The system uses Gemini AI to analyze incoming business requests.
+
+The AI determines the appropriate priority:
+
+🟢 Low – General or non-urgent requests
+🟡 Medium – Requests requiring attention
+🔴 High – Urgent or critical requests
+
+If the AI service is unavailable or the quota is exhausted, the application uses a deterministic local fallback mechanism to continue processing requests.
+
+📩 Email Notifications
+
+The system automatically sends email notifications to the customer after the required workflow action is completed.
+
+Email delivery is handled using Brevo API.
+
+The recipient email address is taken from the submitted business request.
+
+🔐 Authentication
+
+The application provides authentication for authorized users.
+
+Features include:
+
+Admin login
+Session-based authentication
+Protected dashboard
+Request review and approval
+Logout functionality
+📊 Dashboard
+
+The dashboard allows authorized users to:
+
+View submitted requests
+Check request priority
+Review request details
+Approve requests
+Reject requests
+Track request status
+Trigger automated notifications
+🧪 Testing
+
+The application can be tested using different request priorities.
+
+Low Priority
+Customer needs general information about the available services.
+Please provide details about pricing and available plans.
+Medium Priority
+Customer is experiencing an issue with their account
+and needs assistance resolving the problem within the next few hours.
+High Priority
+URGENT: Customer is unable to access their account
+and has an important business operation scheduled today.
+Please resolve this issue immediately.
+🌐 Deployment
+
+The application is deployed using Render.
+
+Live Application:
+
+https://ai-business-automation-qfx0.onrender.com
+🔮 Future Enhancements
+📌 Additional business automation workflows
+📌 Advanced AI decision-making
+📌 Multiple user roles
+📌 Email templates
+📌 Real-time notifications
+📌 Advanced analytics dashboard
+📌 Docker support
+📌 Cloud database integration
+📌 More third-party integrations
+📌 Workflow scheduling
+💡 Why This Project?
+
+This project demonstrates practical experience in building an AI-powered business automation platform using modern backend technologies.
+
+It showcases:
+
+AI integration
+REST API development
+Database management
+Authentication
+Business workflow automation
+Email automation
+Human-in-the-loop processing
+Error handling
+Cloud deployment
+📄 License
+
+This project is licensed under the MIT License.
+
+👨‍💻 Author
+
+Dusa Nikhil
+
+📧 Email: dusanikhil3@gmail.com
+
+💼 LinkedIn: https://www.linkedin.com/in/nikhil-dusa-71089b1a7
+
+🐙 GitHub: https://github.com/Nikhildusa07
+
+⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ Star on GitHub.
+
+
+
+**This is the style you should use**: simple sections, emojis, installation steps, project structure, features, workflow, deployment, and author — similar to your Notes Management README, while still reflecting what you actually built.
