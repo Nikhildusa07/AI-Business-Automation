@@ -109,6 +109,7 @@ AI-Business-Automation
 Clone Repository
 
 git clone https://github.com/Nikhildusa07/AI-Business-Automation.git
+
 cd AI-Business-Automation
 
 Backend Setup
@@ -123,25 +124,10 @@ Install Dependencies
 pip install -r requirements.txt
 ⚙️ Environment Variables
 
-Create a .env file in the project root.
+## Admin dashboard
 
-GEMINI_API_KEY=your_gemini_api_key
-
-
-BREVO_API_KEY=your_brevo_api_key
-BREVO_SENDER_EMAIL=your_verified_sender_email
-
-
-DATABASE_URL=your_database_url
-
-
-ADMIN_USERNAME=your_admin_username
-ADMIN_PASSWORD=your_admin_password
-
-
-SECRET_KEY=your_secret_key
-
-Do not upload your .env file or API keys to GitHub.
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=123456789
 
 ▶️ Run the Application
 
@@ -152,6 +138,7 @@ python -m uvicorn app.main:app --reload
 Application URL:
 
 http://127.0.0.1:8000/
+
 🔄 Automation Workflow
 Customer Request
        ↓
@@ -201,6 +188,7 @@ Session-based authentication
 Protected dashboard
 Request review and approval
 Logout functionality
+
 📊 Dashboard
 
 The dashboard allows authorized users to:
@@ -212,6 +200,7 @@ Approve requests
 Reject requests
 Track request status
 Trigger automated notifications
+
 🧪 Testing
 
 The application can be tested using different request priorities.
@@ -226,6 +215,7 @@ High Priority
 URGENT: Customer is unable to access their account
 and has an important business operation scheduled today.
 Please resolve this issue immediately.
+
 🌐 Deployment
 
 The application is deployed using Render.
@@ -259,6 +249,7 @@ Email automation
 Human-in-the-loop processing
 Error handling
 Cloud deployment
+
 📄 License
 
 This project is licensed under the MIT License.
