@@ -122,14 +122,14 @@ Linux / macOS
 source venv/bin/activate
 Install Dependencies
 pip install -r requirements.txt
-⚙️ Environment Variables
+# ⚙️ Environment Variables
 
-## Admin dashboard
+# Admin dashboard
 
 ADMIN_USERNAME=admin
 ADMIN_PASSWORD=123456789
 
-▶️ Run the Application
+# Run the Application
 
 Start the FastAPI server:
 
@@ -139,7 +139,7 @@ Application URL:
 
 http://127.0.0.1:8000/
 
-🔄 Automation Workflow
+# Automation Workflow
 Customer Request
        ↓
 Request Validation
@@ -157,6 +157,7 @@ Approval / Rejection
 Automated Action
        ↓
 Email Notification
+
 🤖 AI Processing
 
 The system uses Gemini AI to analyze incoming business requests.
